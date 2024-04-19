@@ -8,14 +8,6 @@ def matrixAdd():
         result = matrix1[x] + matrix2[x]
         resultMatrix.append(result)
 
-def matrixSub():
-    for x in range(0 , len(matrix1)):
-        print(x)
-        result = matrix1[x] - matrix2[x]
-        resultMatrix.append(result)
-
-operationChoice = int(input("Choose the operation to be performed \n 1.Addition \n 2. Substraction \n 3. Constant Multiplication \n 4.Matrix Multiplication"))
-
 print("Input the values as they appear in rows, starting with a1")
 x = 0
 while x < 9:    
@@ -31,10 +23,5 @@ while x < 9:
     x = x + 1
 print(matrix2)
 
-if operationChoice == 1:
-    matrixAdd()
-elif operationChoice == 2:
-    matrixSub()
-else:
-    print("Needs to be developed")
+matrixAdd()
 print(resultMatrix)
