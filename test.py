@@ -6,3 +6,5 @@ for row in arrayOne:
     for element in arrayOne[rowIndex]:
         result = element * arrayTwo[arrayTwoRowIndex][rowIndex]
         print(result)
+
+

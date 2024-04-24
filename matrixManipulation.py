@@ -4,7 +4,6 @@ matrix2 = []
 resultMatrix = []
 
 # Function to convert a single list a 2D matrix
-# Need to add support for 2x2 matrices
 def matrixConversion(matrix):
     row = []
     convertedMatrix = []
@@ -42,21 +41,21 @@ def scalarMult():
 def matrixMult():
     m1 = matrixConversion(matrix1)
     m2 = matrixConversion(matrix2)
-    print(m1)
-    print(m2)
-    row = 0
-    item = row
-    transList = []
-    x = 0 
-    while row < 2:
-        print(row)
-        for value in m1[row]:
-            transNumber = value * m2[x][item]
-            x = x + 1
-            transList.append(transNumber)
-        number = sum(transList)
-        resultMatrix.append(number)
-        row = row + 1
+    result = []
+    intermediate = []
+    for rowOne in m1:
+        listOneRowIndex = m1.index(rowOne)
+        for rowTwo in m2:
+            listTwoRowIndex = m2.index(rowTwo)
+            x = 0
+            for columnOne in m1[listOneRowIndex]:
+                res = m1[listOneRowIndex][x] * m2[x][listTwoRowIndex]
+                intermediate.append(res)
+                x = x + 1
+            resultMatrix.append(sum(intermediate))
+            intermediate = []
+
+        
     
 # Define operation and size
 operationChoice = int(input("Choose the operation to be performed \n 1. Addition \n 2. Substraction \n 3. Scalar Multiplication \n 4. Matrix Multiplication \n"))
@@ -97,5 +96,4 @@ else:
     print("Needs to be developed")
 
 # Prints a 2D array that contains the resultant matrix
-print(resultMatrix)
 print(matrixConversion(resultMatrix))

@@ -1,16 +1,18 @@
-listOne = [[1,2,3],[5,5,6],[7,8,9]]
-listTwo = [[1,2,3],[4,5,6],[7,8,9]]
+listOne = [[1,2,4],[-2,1,5],[1,1,1]]
+listTwo = [[4,0,3],[0,1,2],[1,2,2]]
 result = []
-x = 0
+intermediate = []
 for rowOne in listOne:
     listOneRowIndex = listOne.index(rowOne)
     for rowTwo in listTwo:
         listTwoRowIndex = listTwo.index(rowTwo)
+        x = 0
         for columnOne in listOne[listOneRowIndex]:
-            result = listOne[listOneRowIndex][x] * listTwo[x][listTwoRowIndex]
-            print(result)
+            res = listOne[listOneRowIndex][x] * listTwo[x][listTwoRowIndex]
+            intermediate.append(res)
             x = x + 1
-        break
-    break
+        result.append(sum(intermediate))
+        intermediate = []
+print(result)
         
         

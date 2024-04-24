@@ -46,8 +46,6 @@ for product in productList:
             productDict[key] += value
         else:
             productDict[key] = value
-
 if "+" in productDict:
     productDict.pop("+")
 print(productDict)
-
