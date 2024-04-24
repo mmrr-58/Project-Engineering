@@ -1,14 +1,8 @@
-currentlist = []
-for w in input1:
-    currentlist.append(w)
-    if len(currentlist) == 3:
-        matrix1.append(currentlist)
-        currentlist = []
-print(matrix1)
-
- row = []
-    for w in interList:
-        row.append(w)
-        if len(row) == 3:
-            matrix1.append(row)
-            row = []
+arrayOne = [[1,1,1], [2,2,2], [1,1,1]]
+arrayTwo = [[4,5,1], [1,1,1], [1,1,1]]
+for row in arrayOne:
+    rowIndex = arrayOne.index(row)
+    arrayTwoRowIndex = 0
+    for element in arrayOne[rowIndex]:
+        result = element * arrayTwo[arrayTwoRowIndex][rowIndex]
+        print(result)
