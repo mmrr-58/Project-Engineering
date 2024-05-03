@@ -3,7 +3,7 @@ matrix1 = []
 matrix2 = []
 resultMatrix = []
 
-# Function to convert a single list a 2D matrix
+# Function to convert a single list to a 2D matrix
 def matrixConversion(matrix):
     row = []
     convertedMatrix = []
@@ -41,7 +41,6 @@ def scalarMult():
 def matrixMult():
     m1 = matrixConversion(matrix1)
     m2 = matrixConversion(matrix2)
-    result = []
     intermediate = []
     for rowOne in m1:
         listOneRowIndex = m1.index(rowOne)
