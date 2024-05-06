@@ -29,6 +29,7 @@ for react in chemicalsList:
 if "+" in totalChemicalsDict:
     totalChemicalsDict.pop("+")
 
+# Dictionary for each molecule
 reaction = {}
 x = 1
 for molecule in chemicalsList:
@@ -37,6 +38,7 @@ for molecule in chemicalsList:
         product = reaction["molecule" + str(x)]    
         for key, value in product.items():
             product[key] = -abs(value)
+            x+=1
     else:
         reaction["molecule" + str(x)] = chemparse.parse_formula(molecule)   
         x+=1
@@ -56,6 +58,7 @@ for element in totalChemicalsDict.keys():
     matrix.append(row)
     row = []
 
+# Begin Gaussian Elimination
 for row in matrix:
     if row[0] == 1.0:
         i, j = matrix.index(row) , 0
