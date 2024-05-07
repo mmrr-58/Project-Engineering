@@ -1,6 +1,33 @@
 import chemparse
 import re
 
+def rowSwap(matrix):
+    x = 0
+    y = 0 # Ask about a better way to do this
+    for row in matrix:
+        if row[x] == 1.0:
+            i, j = matrix.index(row) , x
+            matrix[i], matrix[j] = matrix[j], matrix[i]
+            x+=1 
+            y = 1
+    if y != 1:
+        row = []
+        for value in matrix[0]:
+            number = matrix[0][0]
+            number = value/number
+            row.append(number)
+        matrix[0] = row
+        rowSwap(matrix)
+    return matrix
+
+def rowSubstracion(matrix):
+    for row in matrix:
+        value = row[0]
+        value2 = matrix[row+1]
+        
+
+
+
 # Get the reaction from the user
 reactants = input("Enter the reactants: ")
 chemicalsList = reactants.split(" ")
@@ -59,11 +86,6 @@ for element in totalChemicalsDict.keys():
     row = []
 
 # Begin Gaussian Elimination
-for row in matrix:
-    if row[0] == 1.0:
-        i, j = matrix.index(row) , 0
-        matrix[i], matrix[j] = matrix[j], matrix[i]
-    else:
-        continue
+matrix = rowSwap(matrix)
 print(matrix)
 
