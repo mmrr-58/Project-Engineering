@@ -1,45 +1,41 @@
-import chemparse
-import re
+def rowSwap(matrix):
+    x = 0
+    flag = 0
+    for row in matrix:
+        if row[x] == 1.0:
+            i, j = matrix.index(row) , x
+            matrix[i], matrix[j] = matrix[j], matrix[i]
+            x+=1 
+            flag = 1
+    if flag != 1:
+        row = []
+        for value in matrix[0]:
+            number = matrix[0][0]
+            number = value/number
+            row.append(number)
+        matrix[0] = row
+        rowSwap(matrix)
+    return matrix
 
-react = input("Enter the reactants: ")
-reactantList = react.split()
-i = 0
+def rowSubtracion(matrix):
+    for i in range(0, len(matrix)-1):
+        previousRow = matrix[i]
+        for j in range(i+1, len(matrix)):
+            row = matrix[j]
+            intermediate = []
+            for k in range(len(previousRow)):
+                value = row[i]
+                value = previousRow[k]*value
+                intermediate.append(value)
+            for l in range(0, len(row)):
+                row[l] = row[l]-intermediate[l]
+            value = row[i+1]
+            if value == 0:
+                continue
+            for m in range(i+1, len(row)):
+                row[m] = row[m]/value
 
-product = input("Enter the produts: ")
-productList = product.split()
-productListNumber = 0
-
-
-if "+" not in react or product:
-    reactantString = re.sub(" ", " + ", react)
-    productString = re.sub(" ", " + ", product)
-    print("Reaction: ", reactantString, "-->", productString)
-else:
-    print("Reaction: ", react, "-->", product)
-
-reactantDict = {}
-for react in reactantList:
-    reactantValues = chemparse.parse_formula(react)
-    for key, value in reactantValues.items():
-        if key in reactantDict:
-            reactantDict[key] += value
-        else:
-            reactantDict[key] = value
-if "+" in reactantDict:
-    reactantDict.pop("+")
-print(reactantDict)
-
-productDict = {}
-for product in productList:
-    productValues = chemparse.parse_formula(product)
-    for key, value in productValues.items():
-        if key in productDict:
-            productDict[key] += value
-        else:
-            productDict[key] = value
-if "+" in productDict:
-    productDict.pop("+")
-print(productDict)
-
-reaction = react + " " + product
-reactionMatrix = []
+matrix = [[1,2,-1,4],[1,2,1,2],[2,1,1,-2]]
+rowSwap(matrix)
+rowSubtracion(matrix)
+print(matrix)

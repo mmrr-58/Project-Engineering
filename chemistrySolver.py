@@ -3,14 +3,14 @@ import re
 
 def rowSwap(matrix):
     x = 0
-    y = 0 # Ask about a better way to do this
+    flag = 0
     for row in matrix:
         if row[x] == 1.0:
             i, j = matrix.index(row) , x
             matrix[i], matrix[j] = matrix[j], matrix[i]
             x+=1 
-            y = 1
-    if y != 1:
+            flag = 1
+    if flag != 1:
         row = []
         for value in matrix[0]:
             number = matrix[0][0]
@@ -20,13 +20,24 @@ def rowSwap(matrix):
         rowSwap(matrix)
     return matrix
 
-def rowSubstracion(matrix):
-    for row in matrix:
-        value = row[0]
-        value2 = matrix[row+1]
-        
-
-
+def rowSubtracion(matrix):
+    for i in range(0, len(matrix)-1):
+        previousRow = matrix[i]
+        for j in range(i+1, len(matrix)):
+            row = matrix[j]
+            intermediate = []
+            for k in range(len(previousRow)):
+                value = row[i]
+                value = previousRow[k]*value
+                intermediate.append(value)
+            for l in range(0, len(row)):
+                row[l] = row[l]-intermediate[l]
+            value = row[i+1]
+            if value == 0:
+                continue
+            for m in range(i+1, len(row)):
+                row[m] = row[m]/value
+    return matrix
 
 # Get the reaction from the user
 reactants = input("Enter the reactants: ")
@@ -87,5 +98,6 @@ for element in totalChemicalsDict.keys():
 
 # Begin Gaussian Elimination
 matrix = rowSwap(matrix)
+matrix = rowSubtracion(matrix)
 print(matrix)
 
