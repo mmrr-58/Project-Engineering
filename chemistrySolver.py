@@ -39,7 +39,6 @@ def rowSubtracion(matrix):
                 row[m] = row[m]/value
     return matrix
 
-# Get the reaction from the user
 reactants = input("Enter the reactants: ")
 chemicalsList = reactants.split(" ")
 products = input("Enter the products: ")
@@ -47,7 +46,6 @@ productList = products.split(" ")
 for i in productList:
     chemicalsList.append(i)
 
-# Print reaction
 if "+" not in reactants or products:
     reactantString = re.sub(" ", " + ", reactants)
     productString = re.sub(" ", " + ", products)
@@ -55,7 +53,6 @@ if "+" not in reactants or products:
 else:
     print("Reaction: ", reactants, "-->", products)
 
-# Create a dictionary of all the values of the reaction
 totalChemicalsDict = {}
 for react in chemicalsList:
     chemicalValues = chemparse.parse_formula(react)
@@ -67,7 +64,6 @@ for react in chemicalsList:
 if "+" in totalChemicalsDict:
     totalChemicalsDict.pop("+")
 
-# Dictionary for each molecule
 reaction = {}
 x = 1
 for molecule in chemicalsList:
@@ -84,7 +80,6 @@ moleculesList = []
 for molecule in reaction.values():
     moleculesList.append(molecule)
 
-# Converting to a matrix
 matrix = []
 row = []
 for element in totalChemicalsDict.keys():
@@ -97,7 +92,35 @@ for element in totalChemicalsDict.keys():
     row = []
 
 # Begin Gaussian Elimination
+print("Unordered matrix: ", matrix)
 matrix = rowSwap(matrix)
 matrix = rowSubtracion(matrix)
-print(matrix)
+print("Matrix after gaussian elimination: ", matrix)
+
+variables = {}
+variableNames = ["A", "B", "C", "D", "E", "F", "G", "H"]
+row = matrix[0]
+for i in range(len(row)):
+    feira = variableNames[i]
+    variables[str(i)] = variableNames[i]
+
+whatever = []
+moreWhatever = []
+for row in range(len(matrix)-1, -1,-1):
+    thisRow = matrix[row]
+    for number in range(len(thisRow)):
+        juniCortes = matrix[row][number]
+        if juniCortes != 0.0:
+            if str(number) in variables.keys():
+                var = variables[str(number)]
+                maje = str(juniCortes) + var
+                whatever.append(maje)
+    if len(whatever) < 1:
+        continue
+    moreWhatever.append(whatever)
+    whatever = []
+
+print(moreWhatever)
+print("Assigning a value to", feira, "will yield a balanced equation")
+
 
