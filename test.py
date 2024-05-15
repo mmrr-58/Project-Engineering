@@ -35,7 +35,7 @@ def rowSubtracion(matrix):
             for m in range(i+1, len(row)):
                 row[m] = row[m]/value
 
-matrix = [[1,1,1,100],[1,0,2,125],[0,-1,2,25],[0,20,10,30]]
+matrix = [[1,1,1,100],[1,0,2,125],[0,-1,2,25]]
 rowSwap(matrix)
 rowSubtracion(matrix)
 print(matrix)

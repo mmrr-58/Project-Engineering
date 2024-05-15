@@ -36,20 +36,48 @@ def rowSubtracion(matrix):
                 row[m] = row[m]/value
     return matrix
 
-print("Enter equations. If there is no value for the variable, add a 0")
-equation = input("Enter equation: ")
-equationList = []
-while equation != "quit": 
-    equationList.append(equation)
-    equation = input("Enter equation: ")
-
+print("Enter coefficients of the equation one at a time. \nIf there is no value for the variable, add a 0 \nExample: 2x + 3z = 10 --> 2 , 0(y) , 3 , 10\nWhen finished with the equation, enter 'newline'. When finished with the system, enter 'newline' followed by 'end'")
+coefficient = input("Enter coefficient: ")
 matrix = []
-for equation in equationList:
+while coefficient != "end":
     row = []
-    for value in equation:
-        print(value)
-        if value.isnumeric():
-            row.append(int(value))
-            continue
+    while coefficient != "newline":
+        if coefficient.isnumeric:
+            row.append(int(coefficient))
+        else:
+            print("Error: coefficient is not numeric")
+        coefficient = input("Enter coefficient: ")
     matrix.append(row)
+    coefficient = input("Enter coefficient: ")
+
+print("Unordered matrix" , matrix)
+matrix = rowSubtracion(rowSwap(matrix))
 print(matrix)
+
+variables = {}
+variableNames = ["x", "y", "z"]
+row = matrix[0]
+for i in range(len(row)):
+    feira = variableNames[i]
+    variables[str(i)] = variableNames[i]
+
+whatever = []
+moreWhatever = []
+for row in range(len(matrix)-1, -1,-1):
+    thisRow = matrix[row]
+    for number in range(len(thisRow)):
+        juniCortes = matrix[row][number]
+        if juniCortes != 0.0:
+            if str(number) in variables.keys():
+                var = variables[str(number)]
+                maje = str(juniCortes) + var
+                whatever.append(maje)
+                whatever.append("+")
+    if len(whatever) < 1:
+        continue
+    whatever.pop()
+    moreWhatever.append(whatever)
+    whatever = []
+for item in moreWhatever:
+    print(str(item), "= 0")
+print("Assigning a value to", feira, "will yield a balanced equation")

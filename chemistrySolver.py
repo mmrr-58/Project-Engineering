@@ -115,12 +115,13 @@ for row in range(len(matrix)-1, -1,-1):
                 var = variables[str(number)]
                 maje = str(juniCortes) + var
                 whatever.append(maje)
+                whatever.append("+")
     if len(whatever) < 1:
         continue
+    whatever.pop()
     moreWhatever.append(whatever)
     whatever = []
 
-print(moreWhatever)
+for item in moreWhatever:
+    print(str(item), "= 0")
 print("Assigning a value to", feira, "will yield a balanced equation")
-
-

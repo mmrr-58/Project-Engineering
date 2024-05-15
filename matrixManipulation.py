@@ -1,9 +1,9 @@
-# Define variables needed
+
 matrix1 = []
 matrix2 = []
 resultMatrix = []
 
-# Function to convert a single list to a 2D matrix
+
 def matrixConversion(matrix):
     row = []
     convertedMatrix = []
@@ -20,25 +20,25 @@ def matrixConversion(matrix):
     return convertedMatrix
 
 # Function for adding 2 matrices
-def matrixAdd():
+def matrixAdd(matrix1, matrix2):
     for x in range(0 , len(matrix1)):
         result = matrix1[x] + matrix2[x]
         resultMatrix.append(result)
 
 # Function for subtracting 2 matrices
-def matrixSub():
+def matrixSub(matrix1, matrix2):
     for x in range(0 , len(matrix1)):
         result = matrix1[x] - matrix2[x]
         resultMatrix.append(result)
 
 # Function for multiplying with a coefficient
-def scalarMult():
+def scalarMult(matrix1, coefficient):
     for x in range(0, len(matrix1)):
         result = coefficient * matrix1[x]
         resultMatrix.append(result)
 
 # Function for matrix multiplication
-def matrixMult():
+def matrixMult(matrix1, matrix2):
     m1 = matrixConversion(matrix1)
     m2 = matrixConversion(matrix2)
     intermediate = []
@@ -84,15 +84,15 @@ else:
 
 # Performs operations
 if operationChoice == 1:
-    matrixAdd()
+    matrixAdd(matrix1, matrix2)
 elif operationChoice == 2:
-    matrixSub()
+    matrixSub(matrix1, matrix2)
 elif operationChoice == 3:
-    scalarMult()
+    scalarMult(matrix1, coefficient)
 elif operationChoice == 4:
-    matrixMult()
+    matrixMult(matrix1, matrix2)
 else:
-    print("Needs to be developed")
+    print("Error")
 
 # Prints a 2D array that contains the resultant matrix
 print(matrixConversion(resultMatrix))
