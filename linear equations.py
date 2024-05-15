@@ -1,3 +1,5 @@
+import re
+
 def rowSwap(matrix):
     x = 0
     flag = 0
@@ -36,12 +38,12 @@ def rowSubtracion(matrix):
                 row[m] = row[m]/value
     return matrix
 
-print("Enter coefficients of the equation one at a time. \nIf there is no value for the variable, add a 0 \nExample: 2x + 3z = 10 --> 2 , 0(y) , 3 , 10\nWhen finished with the equation, enter 'newline'. When finished with the system, enter 'newline' followed by 'end'")
+print("Enter coefficients of the equation one at a time. \nIf there is no value for the variable, add a 0 \nExample: 2x + 3z = 10 --> 2 , 0(y) , 3 , 10\nWhen finished with the equation, enter 'r'. When finished with the system, enter 'r' followed by 'e'")
 coefficient = input("Enter coefficient: ")
 matrix = []
-while coefficient != "end":
+while coefficient != "e":
     row = []
-    while coefficient != "newline":
+    while coefficient != "r":
         if coefficient.isnumeric:
             row.append(int(coefficient))
         else:
@@ -54,30 +56,30 @@ print("Unordered matrix" , matrix)
 matrix = rowSubtracion(rowSwap(matrix))
 print(matrix)
 
-variables = {}
-variableNames = ["x", "y", "z"]
-row = matrix[0]
-for i in range(len(row)):
-    feira = variableNames[i]
-    variables[str(i)] = variableNames[i]
-
-whatever = []
-moreWhatever = []
-for row in range(len(matrix)-1, -1,-1):
+solutionEquations = []
+equation = []
+variables = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", " "]
+for row in range(0, len(matrix)):
     thisRow = matrix[row]
     for number in range(len(thisRow)):
-        juniCortes = matrix[row][number]
-        if juniCortes != 0.0:
-            if str(number) in variables.keys():
-                var = variables[str(number)]
-                maje = str(juniCortes) + var
-                whatever.append(maje)
-                whatever.append("+")
-    if len(whatever) < 1:
-        continue
-    whatever.pop()
-    moreWhatever.append(whatever)
-    whatever = []
-for item in moreWhatever:
-    print(str(item), "= 0")
-print("Assigning a value to", feira, "will yield a balanced equation")
+        thisNumber = thisRow[number]
+        if thisNumber != 0.0:
+            if number == len(thisRow)-1:
+                result = "= "+ str(thisNumber)
+                equation.append(result)
+            else: 
+                value = str(thisNumber) + variables[number]
+                equation.append(value+" +")
+        elif number == len(thisRow)-1:
+            result = "= "+ str(thisNumber)
+            equation.append(result)
+        else:
+            continue
+    if "+" in equation[-2]:
+        equation[-2] = re.sub(" + ", " ", value)
+    solutionEquations.append(equation)
+    equation = []
+for equations in solutionEquations:
+    print(" ".join(equations))
+
+print("Substituing", variables[number], "into the previous equations will yield solutions to the system of equations")

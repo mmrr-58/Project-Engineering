@@ -1,41 +1,24 @@
-def rowSwap(matrix):
-    x = 0
-    flag = 0
-    for row in matrix:
-        if row[x] == 1.0:
-            i, j = matrix.index(row) , x
-            matrix[i], matrix[j] = matrix[j], matrix[i]
-            x+=1 
-            flag = 1
-    if flag != 1:
-        row = []
-        for value in matrix[0]:
-            number = matrix[0][0]
-            number = value/number
-            row.append(number)
-        matrix[0] = row
-        rowSwap(matrix)
-    return matrix
+import re
+matrix = [[1, 1, -1, -2], [0, 1.0, -1.0, -3.0], [0.0, 0.0, 1.0, 2.0]]
 
-def rowSubtracion(matrix):
-    for i in range(0, len(matrix)-1):
-        previousRow = matrix[i]
-        for j in range(i+1, len(matrix)):
-            row = matrix[j]
-            intermediate = []
-            for k in range(len(previousRow)):
-                value = row[i]
-                value = previousRow[k]*value
-                intermediate.append(value)
-            for l in range(0, len(row)):
-                row[l] = row[l]-intermediate[l]
-            value = row[i+1]
-            if value == 0:
-                continue
-            for m in range(i+1, len(row)):
-                row[m] = row[m]/value
-
-matrix = [[1,1,1,100],[1,0,2,125],[0,-1,2,25]]
-rowSwap(matrix)
-rowSubtracion(matrix)
-print(matrix)
+solutionEquations = []
+equation = []
+variables = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w" "x", "y", "z", " "]
+for row in range(0, len(matrix)):
+    thisRow = matrix[row]
+    for number in range(len(thisRow)):
+        thisNumber = thisRow[number]
+        if thisNumber != 0.0:
+            if number == len(thisRow)-1:
+                result = "= "+ str(thisNumber)
+                equation.append(result)
+            else: 
+                value = str(thisNumber) + variables[number]
+                equation.append(value+"+")
+    if "+" in equation[-2]:
+        equation[-2] = re.sub(" + ", " ", value)
+    solutionEquations.append(equation)
+    equation = []
+print(solutionEquations)
+for equations in solutionEquations:
+    print(" ".join(equations))
